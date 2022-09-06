@@ -1,0 +1,413 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+      "title": "TakeNotes",
+      "description": "Aplicativo para controle de Tarefas",
+      "version": "1.0"
+    },
+    "paths": {
+    "/notes/create":{
+        "post":{
+            "tags": ["Notes"],
+            "summary": "Create a new note",
+            "security":[
+                {"bearerAuth": []}
+            ],
+            "requestBody":{
+                "content":{
+                    "application/json":{
+                        "schema":{
+                            "type": "object",
+                            "properties":{
+                                "title":{
+                                    "type":"string"
+                                },
+                                "description":{
+                                    "type":"string"
+                                },
+                                "priority":{
+                                    "type":"string",
+                                    "enum":["LOW", "MID", "HIGH"]
+                                },
+                                "first_date":{
+                                    "type":"string"
+                                },
+                                "end_date":{
+                                    "type":"string"
+                                }
+                            },
+                            "example":{
+                                "title":"Nota1",
+                                "description": "Descrição da primeira nota, em texto longo.",
+                                "priority": "MID",
+                                "first_date": "2022-09-02T23:00:00.000Z",
+                                "end_date": "2022-09-03T17:30:00.000Z"
+                            }
+                        }
+                    }
+                }
+            },
+            "responses":{
+                "201": {
+                    "description": "Created",
+                    "content": {
+                        "application/json":{
+                            "schema":{
+                                "type": "object",
+                                "properties":{
+                                    "id":{
+                                        "type":"string"
+                                    },
+                                    "user_id":{
+                                        "type":"string"
+                                    },
+                                    "title":{
+                                        "type":"string"
+                                    },
+                                    "description":{
+                                        "type":"string"
+                                    },
+                                    "priority":{
+                                        "type":"string",
+                                        "enum":["LOW", "MID", "HIGH"]
+                                    },
+                                    "status":{
+                                        "type":"string",
+                                        "enum":["CREATED", "MODIFIED", "DELETED", "FINISHED"]
+                                    },
+                                    "first_date":{
+                                        "type":"string"
+                                    },
+                                    "end_date":{
+                                        "type":"string"
+                                    },
+                                    "created_at":{
+                                        "type":"string",
+                                        "default": "now()"
+                                    },
+                                    "updated_at":{
+                                        "type":"string",
+                                        "default": "now()"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Error to create a note."
+                    }
+                }
+            }
+        },
+    "/notes/update/{note_id}":{
+        "put":{
+            "tags": ["Notes"],
+            "summary": "Update an existing note",
+            "security":[
+                {"bearerAuth": []}
+            ],
+            "parameters": [{
+                "in": "path",
+                "name": "note_id",
+                "type": "string",
+                "required": true
+            }],
+            "requestBody":{
+                "content":{
+                    "application/json":{
+                        "schema":{
+                            "type": "object",
+                            "properties":{
+                                "title":{
+                                    "type":"string"
+                                },
+                                "description":{
+                                    "type":"string"
+                                },
+                                "priority":{
+                                    "type":"string",
+                                    "enum":["LOW", "MID", "HIGH"]
+                                },
+                                "first_date":{
+                                    "type":"string"
+                                },
+                                "end_date":{
+                                    "type":"string"
+                                }
+                            },
+                            "example":{
+                                "title":"Nota1",
+                                "description": "Descrição da primeira nota, em texto longo.",
+                                "priority": "MID",
+                                "first_date": "2022-09-02T23:00:00.000Z",
+                                "end_date": "2022-09-03T17:30:00.000Z"
+                            }
+                        }
+                    }
+                }
+            },
+            "responses":{
+                "201": {
+                    "description": "Created",
+                    "content": {
+                        "application/json":{
+                            "schema":{
+                                "type": "object",
+                                "properties":{
+                                    "id":{
+                                        "type":"string"
+                                    },
+                                    "user_id":{
+                                        "type":"string"
+                                    },
+                                    "title":{
+                                        "type":"string"
+                                    },
+                                    "description":{
+                                        "type":"string"
+                                    },
+                                    "priority":{
+                                        "type":"string",
+                                        "enum":["LOW", "MID", "HIGH"]
+                                    },
+                                    "status":{
+                                        "type":"string",
+                                        "enum":["CREATED", "MODIFIED", "DELETED", "FINISHED"]
+                                    },
+                                    "first_date":{
+                                        "type":"string"
+                                    },
+                                    "end_date":{
+                                        "type":"string"
+                                    },
+                                    "created_at":{
+                                        "type":"string",
+                                        "default": "now()"
+                                    },
+                                    "updated_at":{
+                                        "type":"string",
+                                        "default": "now()"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Error to update a note."
+                    }
+                }
+            }
+        },
+        "/notes":{
+            "get":{
+                "tags": ["Notes"],
+                "summary": "Get all Notes from user",
+                "security":[
+                    {"bearerAuth": []}
+                ],
+                "responses":{
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json":{
+                                "schema":{
+                                    "type": "object",
+                                    "properties":{
+                                        "id":{
+                                            "type":"string"
+                                        },
+                                        "user_id":{
+                                            "type":"string"
+                                        },
+                                        "title":{
+                                            "type":"string"
+                                        },
+                                        "priority":{
+                                            "type":"string",
+                                            "enum":["LOW", "MID", "HIGH"]
+                                        },
+                                        "status":{
+                                            "type":"string",
+                                            "enum":["CREATED", "MODIFIED", "DELETED", "FINISHED"]
+                                        },
+                                        "first_date":{
+                                            "type":"string"
+                                        },
+                                        "end_date":{
+                                            "type":"string"
+                                        }
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "500": {
+                            "description": "Error to get a note."
+                        }
+                    }
+                }
+            },
+            "/notes/{note_id}":{
+                "get":{
+                    "tags": ["Notes"],
+                    "summary": "Get a especific note",
+                    "security":[
+                        {"bearerAuth": []}
+                    ],
+                    "parameters": [{
+                        "in": "path",
+                        "name": "note_id",
+                        "type": "string",
+                        "required": true
+                    }],
+                    "responses":{
+                        "201": {
+                            "description": "OK",
+                            "content": {
+                                "application/json":{
+                                    "schema":{
+                                        "type": "object",
+                                        "properties":{
+                                            "id":{
+                                                "type":"string"
+                                            },
+                                            "user_id":{
+                                                "type":"string"
+                                            },
+                                            "title":{
+                                                "type":"string"
+                                            },
+                                            "description":{
+                                                "type":"string"
+                                            },
+                                            "priority":{
+                                                "type":"string",
+                                                "enum":["LOW", "MID", "HIGH"]
+                                            },
+                                            "status":{
+                                                "type":"string",
+                                                "enum":["CREATED", "MODIFIED", "DELETED", "FINISHED"]
+                                            },
+                                            "first_date":{
+                                                "type":"string"
+                                            },
+                                            "end_date":{
+                                                "type":"string"
+                                            },
+                                            "created_at":{
+                                                "type":"string",
+                                                "default": "now()"
+                                            },
+                                            "updated_at":{
+                                                "type":"string",
+                                                "default": "now()"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            "500": {
+                                "description": "Error to get a note."
+                            }
+                        }
+                    }
+                },
+                "/notes/status/{note_id}":{
+                    "put":{
+                        "tags": ["Notes"],
+                        "summary": "Update an existing note status",
+                        "security":[
+                            {"bearerAuth": []}
+                        ],
+                        "parameters":[ {
+                            "in": "path",
+                            "name": "note_id",
+                            "type": "string",
+                            "required": true
+                        }],
+                        "requestBody":{
+                            "content":{
+                                "application/json":{
+                                    "schema":{
+                                        "type": "object",
+                                        "properties":{
+                                            "status":{
+                                                "type":"string",
+                                                "enum":["CREATED", "MODIFIED", "DELETED", "FINISHED"]
+                                            },
+                                        "example":{
+                                            "status": "FINISHED"
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "responses":{
+                            "201": {
+                                "description": "Created",
+                                "content": {
+                                    "application/json":{
+                                        "schema":{
+                                            "type": "object",
+                                            "properties":{
+                                                "id":{
+                                                    "type":"string"
+                                                },
+                                                "user_id":{
+                                                    "type":"string"
+                                                },
+                                                "title":{
+                                                    "type":"string"
+                                                },
+                                                "description":{
+                                                    "type":"string"
+                                                },
+                                                "priority":{
+                                                    "type":"string",
+                                                    "enum":["LOW", "MID", "HIGH"]
+                                                },
+                                                "status":{
+                                                    "type":"string",
+                                                    "enum":["CREATED", "MODIFIED", "DELETED", "FINISHED"]
+                                                },
+                                                "first_date":{
+                                                    "type":"string"
+                                                },
+                                                "end_date":{
+                                                    "type":"string"
+                                                },
+                                                "created_at":{
+                                                    "type":"string",
+                                                    "default": "now()"
+                                                },
+                                                "updated_at":{
+                                                    "type":"string",
+                                                    "default": "now()"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                "500": {
+                                    "description": "Error to update a note."
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "components": {
+                "securitySchemes": {
+                  "bearerAuth": {
+                    "type": "http",
+                    "scheme": "bearer",
+                    "bearerFormat": "JWT"
+                  }
+                }
+              }
+}
+
