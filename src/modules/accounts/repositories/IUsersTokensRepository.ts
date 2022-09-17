@@ -1,4 +1,4 @@
-import { UserTokens } from "../infra/typeorm/entities/UserTokens";
+import { UserTokens } from "../infra/prisma/interfaces/UserTokens";
 import { ICreateUserTokenDTO } from "./dtos/ICreateUserTokenDTO";
 
 export interface IUsersTokensRepository {

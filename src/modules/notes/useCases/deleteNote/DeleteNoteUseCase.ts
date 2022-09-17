@@ -4,15 +4,20 @@ import { INotesRepository } from "@modules/notes/repositories/INotesRepository";
 
 import { inject, injectable } from "tsyringe";
 
+interface IRequest {
+  user_id: string;
+  note_id: string;
+}
+
 @injectable()
-export default class CreateNoteUseCase {
+export default class DeleteNoteUseCase {
   constructor(
     @inject("NotesRepository")
     private NotesRepository: INotesRepository
   ) {}
 
-  async execute(data: ICreateNoteDTO): Promise<Note> {
-    const note = await this.NotesRepository.create(data);
+  async execute({ user_id, note_id }: IRequest): Promise<Note> {
+    const note = await this.NotesRepository.delete(user_id, note_id);
 
     return note;
   }

@@ -3,7 +3,7 @@ import { INotesRepository } from "@modules/notes/repositories/INotesRepository";
 import { inject, injectable } from "tsyringe";
 
 @injectable()
-export class ListNotesByUserUseCase {
+export default class ListNotesByUserUseCase {
   constructor(
     @inject("NotesRepository")
     private notesRepository: INotesRepository

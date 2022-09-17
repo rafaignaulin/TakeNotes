@@ -110,7 +110,9 @@
             "parameters": [{
                 "in": "path",
                 "name": "note_id",
-                "type": "string",
+                "schema": {
+                    "type": "string"
+                },
                 "required": true
             }],
             "requestBody":{
@@ -259,7 +261,9 @@
                     "parameters": [{
                         "in": "path",
                         "name": "note_id",
-                        "type": "string",
+                        "schema": {
+                            "type": "string"
+                        },
                         "required": true
                     }],
                     "responses":{
@@ -325,7 +329,9 @@
                         "parameters":[ {
                             "in": "path",
                             "name": "note_id",
-                            "type": "string",
+                            "schema": {
+                                "type": "string"
+                            },
                             "required": true
                         }],
                         "requestBody":{
@@ -337,13 +343,14 @@
                                             "status":{
                                                 "type":"string",
                                                 "enum":["CREATED", "MODIFIED", "DELETED", "FINISHED"]
-                                            },
+                                            }
+                                        },
                                         "example":{
                                             "status": "FINISHED"
                                         }
-                                    }
                                 }
                             }
+                        }
                         },
                         "responses":{
                             "201": {
@@ -398,7 +405,7 @@
                             }
                         }
                     }
-                }
+                
             },
             "components": {
                 "securitySchemes": {
