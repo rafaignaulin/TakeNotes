@@ -6,6 +6,76 @@
       "version": "1.0"
     },
     "paths": {
+    "/users/create":{
+        "post": {
+            "tags": ["Users"],
+            "summary": "Create user",
+            "description": "Create User",
+            "requestBody": {
+            "content": {
+                "application/json": {
+                "schema": {
+                    "type": "object",
+                    "properties": {
+                    "name": {
+                            "type": "string"
+                        },
+                    "username": {
+                        "type": "string"
+                    },
+                    "email": {
+                        "type":"string"
+                    },
+                    "password": {
+                        "type": "string"
+                    }
+                    }
+                }
+                }
+            }
+            }, 
+            "responses":{
+            "200": {
+                "description": "Success"
+            },
+            "400": {
+                "description": "An user already exists"
+            }
+            }
+        }
+        },
+    "/sessions":{
+        "post": {
+            "tags": ["Session"],
+            "summary": "Authentication user",
+            "description": "Authentication User",
+            "requestBody": {
+            "content": {
+                "application/json": {
+                "schema": {
+                    "type": "object",
+                    "properties": {
+                    "email": {
+                        "type":"string"
+                    },
+                    "password": {
+                        "type": "string"
+                    }
+                    }
+                }
+                }
+            }
+            }, 
+            "responses":{
+            "200": {
+                "description": "Success"
+            },
+            "400": {
+                "description": "Email or password incorrect"
+            }
+            }
+        }
+        },
     "/notes/create":{
         "post":{
             "tags": ["Notes"],
@@ -100,27 +170,22 @@
                 }
             }
         },
-    "/notes/update/{note_id}":{
+    "/notes/update":{
         "put":{
             "tags": ["Notes"],
             "summary": "Update an existing note",
             "security":[
                 {"bearerAuth": []}
             ],
-            "parameters": [{
-                "in": "path",
-                "name": "note_id",
-                "schema": {
-                    "type": "string"
-                },
-                "required": true
-            }],
             "requestBody":{
                 "content":{
                     "application/json":{
                         "schema":{
                             "type": "object",
                             "properties":{
+                                "note_id":{
+                                    "type": "string"
+                                },
                                 "title":{
                                     "type":"string"
                                 },
