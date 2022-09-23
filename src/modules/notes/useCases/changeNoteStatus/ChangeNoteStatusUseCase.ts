@@ -5,8 +5,7 @@ import { inject, injectable } from "tsyringe";
 
 interface IRequest {
   note_id: string;
-  user_id: string;
-  status: StatusEnum;
+  status: "CREATED" | "MODIFIED" | "DELETED" | "FINISHED";
 }
 
 @injectable()
@@ -16,7 +15,7 @@ export default class ChangeNoteStatusUseCase {
     private notesRepository: NotesRepository
   ) {}
 
-  async execute({ note_id, user_id, status }: IRequest): Promise<Note> {
+  async execute({ note_id, status }: IRequest): Promise<Note> {
     const foundNote = this.notesRepository.findById(note_id);
 
     if (!foundNote) throw new AppError("This note does not exists!");

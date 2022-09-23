@@ -69,7 +69,7 @@ export class NotesRepository implements INotesRepository {
     });
   }
 
-  async updateStatus(note_id: string, { status }: StatusEnum): Promise<Note> {
+  async updateStatus(note_id: string, status: "CREATED" | "MODIFIED" | "DELETED" | "FINISHED"): Promise<Note> {
     return await prismaClient.note.update({
       where: { id: note_id },
       data: { id: note_id, status },

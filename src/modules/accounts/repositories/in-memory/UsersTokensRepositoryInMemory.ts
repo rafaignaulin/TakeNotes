@@ -1,4 +1,6 @@
-import { UserTokens } from "@modules/accounts/infra/typeorm/entities/UserTokens";
+
+import { UserTokens } from "@modules/accounts/infra/prisma/interfaces/UserTokens";
+import { randomUUID } from "crypto";
 import { ICreateUserTokenDTO } from "../dtos/ICreateUserTokenDTO";
 import { IUsersTokensRepository } from "../IUsersTokensRepository";
 
@@ -11,13 +13,14 @@ export default class UsersTokensRepositoryInMemory
     refresh_token,
     expires_date,
   }: ICreateUserTokenDTO): Promise<UserTokens> {
-    const userToken = new UserTokens();
 
-    Object.assign(userToken, {
-      expires_date,
-      refresh_token,
+    let userToken:UserTokens = {
+      id: randomUUID(),
       user_id,
-    });
+      refresh_token,
+      expires_date,
+      created_at: new Date()
+    };
 
     this.usersTokens.push(userToken);
 

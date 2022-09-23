@@ -30,7 +30,7 @@ describe("Send Forgot Mail", () => {
     const sendMail = spyOn(mailProvider, "sendMail");
 
     await usersRepositoryInMemory.create({
-      driver_license: "664168",
+      username: "johndoe",
       email: "doe@doe.com.br",
       name: "John Doe",
       password: "123456",
@@ -50,7 +50,7 @@ describe("Send Forgot Mail", () => {
   it("should be able to create an users token", async () => {
     const generateTokenMail = spyOn(usersTokensRepositoryInMemory, "create");
     await usersRepositoryInMemory.create({
-      driver_license: "798756",
+      username: "johndoe",
       email: "doe2@doe2.com.br",
       name: "John Doe2",
       password: "123456",

@@ -1,6 +1,7 @@
 import ChangeNoteStatusController from "@modules/notes/useCases/changeNoteStatus/ChangeNoteStatusController";
 import CreateNoteController from "@modules/notes/useCases/createNote/CreateNoteController";
 import DeleteNoteController from "@modules/notes/useCases/deleteNote/DeleteNoteController";
+import ListNoteController from "@modules/notes/useCases/listNote/ListNoteController";
 import ListNotesByUserController from "@modules/notes/useCases/listNotesByUser/ListNotesByUserController";
 import UpdateNoteController from "@modules/notes/useCases/updateNote/UpdateNoteController";
 import { Router } from "express";
@@ -13,8 +14,10 @@ const deleteNoteController = new DeleteNoteController();
 const updateNoteController = new UpdateNoteController();
 const changeStatusNoteController = new ChangeNoteStatusController();
 const listNotesByUserController = new ListNotesByUserController();
+const listNoteController = new ListNoteController();
 
 notesRoutes.get("/", ensureAuthenticated, listNotesByUserController.handle);
+notesRoutes.get("/:id", ensureAuthenticated, listNoteController.handle);
 notesRoutes.post("/create", ensureAuthenticated, createNoteController.handle);
 notesRoutes.put("/update", ensureAuthenticated, updateNoteController.handle);
 notesRoutes.put(
